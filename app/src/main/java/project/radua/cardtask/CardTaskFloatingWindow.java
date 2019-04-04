@@ -29,6 +29,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,7 +46,7 @@ public class CardTaskFloatingWindow extends Service{
     private WindowManager windowManager;
     private WindowManager.LayoutParams layoutParams;
     private Button button;
-    private ImageView imageViewer;
+    private ImageView imageViewer ;
     ConstraintLayout touchLayout;
 
     @Override
@@ -94,12 +96,15 @@ public class CardTaskFloatingWindow extends Service{
                 public void onClick(View v) {
                     Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_SHORT).show();
 
-                    layoutParams.width =  windowManager.getDefaultDisplay().getWidth()/2;
-                    layoutParams.x -= windowManager.getDefaultDisplay().getWidth()/4;
-                    layoutParams.height = windowManager.getDefaultDisplay().getHeight()/2;
+                    layoutParams.width =  windowManager.getDefaultDisplay().getWidth();
+                    layoutParams.x = 0;
+                    layoutParams.height = windowManager.getDefaultDisplay().getHeight();
+                    layoutParams.y = 0;
                     touchLayout = (ConstraintLayout)LayoutInflater.from(getApplicationContext()).inflate(R.layout.cardfloatlayout,null);
                     windowManager.addView(touchLayout,layoutParams);
+                    windowManager.removeView(button);
                     CheckClick();
+                    //SinglePicture();
 
                 }
             });
@@ -117,10 +122,22 @@ public class CardTaskFloatingWindow extends Service{
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView,"rotation",180f,360f);
-                objectAnimator.setDuration(600);
-                objectAnimator.start();
-                PackageInit();
+                //ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView,"rotation",0f,360f);
+                //objectAnimator.setDuration(600);
+                //objectAnimator.start();
+                ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(imageView,"rotation",0f,360f);
+                objectAnimator1.setDuration(600);
+                objectAnimator1.start();
+                //windowManager.removeView(touchLayout);
+                //PackageInit();
+            }
+        });
+
+        final View imageview2 = touchLayout.findViewById(R.id.imageView2);
+        imageview2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                windowManager.removeView(touchLayout);
             }
         });
 
@@ -217,8 +234,28 @@ public class CardTaskFloatingWindow extends Service{
     }
 
     public void SinglePicture(){
-
-
+        imageViewer = new ImageView(getApplicationContext());
+        List<UsageStats>stats = new painting().CreatAppList(getApplicationContext());
+        if (stats == null)return;
+        Drawable drawable = new painting().GetIcon(stats.get(3).getPackageName(),getApplicationContext());
+        Bitmap bitmap = new painting().drawableToBitamp(drawable);
+        final Bitmap bitmap1 = CreateMDicon(bitmap);
+        if (bitmap1 == null) return;
+        imageViewer.setImageBitmap(bitmap1);
+        layoutParams.height = bitmap1.getHeight() ;
+        layoutParams.width = bitmap1.getWidth() ;
+        imageViewer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                touchLayout.setMaxHeight(bitmap1.getHeight());
+                touchLayout.setMaxWidth(bitmap1.getWidth());
+                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageViewer,"rotation",0f,360f);
+                objectAnimator.setDuration(600);
+                objectAnimator.start();
+                Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_SHORT).show();
+            }
+        });
+        windowManager.addView(imageViewer,layoutParams);
 
     }
 
@@ -264,7 +301,7 @@ public class CardTaskFloatingWindow extends Service{
         paint.setColor(ColorIcon);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawRect(0,0,width1,hidth1,paint);
-        canvas.drawBitmap(bitmap,width2/4,hidth2/4,null);
+        canvas.drawBitmap(bitmap,width2/2,hidth2/2,null);
         canvas.save();
         return bitmap1;
     }
