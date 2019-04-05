@@ -2,6 +2,7 @@ package project.radua.cardtask;
 
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AppOpsManager;
@@ -77,6 +78,8 @@ public class CardTaskFloatingWindow extends Service{
         layoutParams.width = 120;
         layoutParams.height = 160;
         int width = windowManager.getDefaultDisplay().getWidth();
+        int hidth = windowManager.getDefaultDisplay().getHeight();
+        layoutParams.y = hidth/5;
         layoutParams.x =width+-60;
         layoutParams.gravity = Gravity.LEFT;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS ;
@@ -104,7 +107,6 @@ public class CardTaskFloatingWindow extends Service{
                     windowManager.addView(touchLayout,layoutParams);
                     windowManager.removeView(button);
                     CheckClick();
-                    //SinglePicture();
 
                 }
             });
@@ -118,31 +120,317 @@ public class CardTaskFloatingWindow extends Service{
     public void CheckClick()
     {
         final View imageView = touchLayout.findViewById(R.id.imageView);
-        //ImageView imageView1 = touchLayout.findViewById(R.id.imageView);
+        final View imageview2 = touchLayout.findViewById(R.id.imageView2);
+        final View imageview3 = touchLayout.findViewById(R.id.imageView5);
+        final View imageview4 = touchLayout.findViewById(R.id.imageView6);
+        final View imageview5 = touchLayout.findViewById(R.id.imageView7);
+        final View imageview6 = touchLayout.findViewById(R.id.imageView8);
+        final View imageview7 = touchLayout.findViewById(R.id.imageView9);
+        final View imageview8 = touchLayout.findViewById(R.id.imageView10);
+        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(imageView,"rotation",180f,-50f);
+        objectAnimator1.setDuration(600);
+        objectAnimator1.start();
+        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(imageview5,"rotation",180f,-20f);
+        objectAnimator2.setDuration(600);
+        objectAnimator2.start();
+        final ObjectAnimator objectAnimator3 = ObjectAnimator.ofFloat(imageview6,"rotation",180f,10f);
+        objectAnimator3.setDuration(600);
+        objectAnimator3.start();
+        ObjectAnimator objectAnimator4 = ObjectAnimator.ofFloat(imageview7,"rotation",180f,40f);
+        objectAnimator4.setDuration(600);
+        objectAnimator4.start();
+        ObjectAnimator objectAnimator5 = ObjectAnimator.ofFloat(imageview8,"rotation",180f,70f);
+        objectAnimator5.setDuration(600);
+        objectAnimator5.start();
+        final List<UsageStats> stats = new painting().CreatAppList(getApplicationContext());
+        PackageInit(stats);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView,"rotation",0f,360f);
-                //objectAnimator.setDuration(600);
-                //objectAnimator.start();
-                ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(imageView,"rotation",0f,360f);
-                objectAnimator1.setDuration(600);
-                objectAnimator1.start();
-                //windowManager.removeView(touchLayout);
-                //PackageInit();
+                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView,"rotation",-50f,310f);
+                objectAnimator.setDuration(1200);
+                objectAnimator.start();
+                new painting().TurnToActivity(stats.get(4).getPackageName(),getApplicationContext());
+                final ObjectAnimator objectAnimators = ObjectAnimator.ofFloat(imageView,"rotation",-50f,-180f);
+                objectAnimators.setDuration(600);
+                RotaImage(imageview5,-20f,-180f,600);
+                RotaImage(imageview6,10f,-180f,600);
+                RotaImage(imageview7,40f,-180f,600);
+                RotaImage(imageview8,70f,-180f,600);
+                objectAnimators.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float value = (float) objectAnimators.getAnimatedValue("rotation");
+                        if (value == -180f){
+
+                            layoutParams.width = 120;
+                            layoutParams.height = 160;
+                            int width = windowManager.getDefaultDisplay().getWidth();
+                            layoutParams.x =width+-60;
+                            int hidth = windowManager.getDefaultDisplay().getHeight();
+                            layoutParams.y = hidth/5;
+                            try {
+                                windowManager.removeView(touchLayout);
+                                windowManager.addView(button,layoutParams);
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
+                });
+                objectAnimators.start();
             }
         });
-
-        final View imageview2 = touchLayout.findViewById(R.id.imageView2);
         imageview2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                windowManager.removeView(touchLayout);
+                final ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView,"rotation",-50f,-180f);
+                objectAnimator.setDuration(600);
+                RotaImage(imageview5,-20f,-180f,600);
+                RotaImage(imageview6,10f,-180f,600);
+                RotaImage(imageview7,40f,-180f,600);
+                RotaImage(imageview8,70f,-180f,600);
+                objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float value = (float) objectAnimator.getAnimatedValue("rotation");
+                        if (value == -180f){
+                            layoutParams.width = 120;
+                            layoutParams.height = 160;
+                            int width = windowManager.getDefaultDisplay().getWidth();
+                            layoutParams.x =width+-60;
+                            int hidth = windowManager.getDefaultDisplay().getHeight();
+                            layoutParams.y = hidth/5;
+                            try {
+                                windowManager.removeViewImmediate(touchLayout);
+                                windowManager.addView(button,layoutParams);
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
+                });
+                objectAnimator.start();
+
             }
         });
 
+       imageview3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView,"rotation",-50f,-180f);
+                objectAnimator.setDuration(600);
+                RotaImage(imageview5,-20f,-180f,600);
+                RotaImage(imageview6,10f,-180f,600);
+                RotaImage(imageview7,40f,-180f,600);
+                RotaImage(imageview8,70f,-180f,600);
+                objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float value = (float) objectAnimator.getAnimatedValue("rotation");
+                        if (value == -180f){
+                            layoutParams.width = 120;
+                            layoutParams.height = 160;
+                            int width = windowManager.getDefaultDisplay().getWidth();
+                            layoutParams.x =width+-60;
+                            int hidth = windowManager.getDefaultDisplay().getHeight();
+                            layoutParams.y = hidth/5;
+
+                            try {
+                                windowManager.removeView(touchLayout);
+                                windowManager.addView(button,layoutParams);
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
+                });
+                objectAnimator.start();
+            }
+        });
+
+        imageview4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView,"rotation",-50f,-180f);
+                objectAnimator.setDuration(600);
+                RotaImage(imageview5,-20f,-180f,600);
+                RotaImage(imageview6,10f,-180f,600);
+                RotaImage(imageview7,40f,-180f,600);
+                RotaImage(imageview8,70f,-180f,600);
+
+                objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float value = (float) objectAnimator.getAnimatedValue("rotation");
+                        if (value == -180f){
+                            layoutParams.width = 120;
+                            layoutParams.height = 160;
+                            int width = windowManager.getDefaultDisplay().getWidth();
+                            layoutParams.x =width+-60;
+                            int hidth = windowManager.getDefaultDisplay().getHeight();
+                            layoutParams.y = hidth/5;
+                            try {
+                                windowManager.removeView(touchLayout);
+                                windowManager.addView(button,layoutParams);
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
+                });
+                objectAnimator.start();
+            }
+        });
+
+
+        imageview5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new painting().TurnToActivity(stats.get(3).getPackageName(),getApplicationContext());
+                final ObjectAnimator objectAnimators = ObjectAnimator.ofFloat(imageView,"rotation",-50f,-180f);
+                objectAnimators.setDuration(600);
+                RotaImage(imageview5,-20f,-180f,600);
+                RotaImage(imageview6,10f,-180f,600);
+                RotaImage(imageview7,40f,-180f,600);
+                RotaImage(imageview8,70f,-180f,600);
+                objectAnimators.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float value = (float) objectAnimators.getAnimatedValue("rotation");
+                        if (value == -180f){
+                            layoutParams.width = 120;
+                            layoutParams.height = 160;
+                            int width = windowManager.getDefaultDisplay().getWidth();
+                            layoutParams.x =width+-60;
+                            int hidth = windowManager.getDefaultDisplay().getHeight();
+                            layoutParams.y = hidth/5;
+
+                            try {
+                                windowManager.removeView(touchLayout);
+                                windowManager.addView(button,layoutParams);
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
+                });
+                objectAnimators.start();
+            }
+        });
+
+        imageview6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new painting().TurnToActivity(stats.get(2).getPackageName(),getApplicationContext());
+
+                final ObjectAnimator objectAnimators = ObjectAnimator.ofFloat(imageView,"rotation",-50f,-180f);
+                objectAnimators.setDuration(600);
+                RotaImage(imageview5,-20f,-180f,600);
+                RotaImage(imageview6,10f,-180f,600);
+                RotaImage(imageview7,40f,-180f,600);
+                RotaImage(imageview8,70f,-180f,600);
+                objectAnimators.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float value = (float) objectAnimators.getAnimatedValue("rotation");
+                        if (value == -180f){
+                            layoutParams.width = 120;
+                            layoutParams.height = 160;
+                            int width = windowManager.getDefaultDisplay().getWidth();
+                            layoutParams.x =width+-60;
+                            int hidth = windowManager.getDefaultDisplay().getHeight();
+                            layoutParams.y = hidth/5;
+                            try {
+                                windowManager.removeView(touchLayout);
+                                windowManager.addView(button,layoutParams);
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
+                });
+                objectAnimators.start();
+            }
+        });
+
+        imageview7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new painting().TurnToActivity(stats.get(1).getPackageName(),getApplicationContext());
+
+                final ObjectAnimator objectAnimators = ObjectAnimator.ofFloat(imageView,"rotation",-50f,-180f);
+                objectAnimators.setDuration(600);
+                RotaImage(imageview5,-20f,-180f,600);
+                RotaImage(imageview6,10f,-180f,600);
+                RotaImage(imageview7,40f,-180f,600);
+                RotaImage(imageview8,70f,-180f,600);
+                objectAnimators.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float value = (float) objectAnimators.getAnimatedValue("rotation");
+                        if (value == -180f){
+                            layoutParams.width = 120;
+                            layoutParams.height = 160;
+                            int width = windowManager.getDefaultDisplay().getWidth();
+                            layoutParams.x =width+-60;
+                            int hidth = windowManager.getDefaultDisplay().getHeight();
+                            layoutParams.y = hidth/5;
+                            try {
+                                windowManager.removeView(touchLayout);
+                                windowManager.addView(button,layoutParams);
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
+                });
+                objectAnimators.start();
+            }
+        });
+
+        imageview8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new painting().TurnToActivity(stats.get(0).getPackageName(),getApplicationContext());
+
+                final ObjectAnimator objectAnimators = ObjectAnimator.ofFloat(imageView,"rotation",-50f,-180f);
+                objectAnimators.setDuration(600);
+                RotaImage(imageview5,-20f,-180f,600);
+                RotaImage(imageview6,10f,-180f,600);
+                RotaImage(imageview7,40f,-180f,600);
+                RotaImage(imageview8,70f,-180f,600);
+                objectAnimators.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float value = (float) objectAnimators.getAnimatedValue("rotation");
+                        if (value == -180f){
+                            layoutParams.width = 120;
+                            layoutParams.height = 160;
+                            int width = windowManager.getDefaultDisplay().getWidth();
+                            layoutParams.x =width+-60;
+                            int hidth = windowManager.getDefaultDisplay().getHeight();
+                            layoutParams.y = hidth/5;
+
+                            try {
+                                windowManager.removeView(touchLayout);
+                                windowManager.addView(button,layoutParams);
+                            }catch (Exception e){
+
+                            }
+                        }
+                    }
+                });
+                objectAnimators.start();
+            }
+        });
     }
 
+    public void RotaImage(View imageView,float num1,float num2,int duration){
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView,"rotation",num1,num2);
+        objectAnimator.setDuration(duration);
+        objectAnimator.start();
+    }
 
     private class FloatingOnTouchListener implements View.OnTouchListener{
         private int x;
@@ -211,20 +499,27 @@ public class CardTaskFloatingWindow extends Service{
 
 
     //测试包名以及获取图标的测试化步骤
-    public void PackageInit(){
+    public void PackageInit(List<UsageStats> stats){
         ImageView imageView = touchLayout.findViewById(R.id.imageView);
+        ImageView imageView1 = touchLayout.findViewById(R.id.imageView7);
+        ImageView imageView2 = touchLayout.findViewById(R.id.imageView8);
+        ImageView imageView3 = touchLayout.findViewById(R.id.imageView9);
+        ImageView imageView4 = touchLayout.findViewById(R.id.imageView10);
         painting painting = new painting();
-        List<UsageStats> stats = painting.CreatAppList(getApplicationContext());
         if (stats == null)return;
-        String test = stats.get(6).getPackageName();
+        String test = stats.get(4).getPackageName();
         int i =stats.size();
             Drawable drawable;
             Bitmap bitmap;
-            drawable = painting.GetIcon(stats.get(6).getPackageName(),getApplicationContext());
+            drawable = painting.GetIcon(stats.get(4).getPackageName(),getApplicationContext());
             bitmap = painting.drawableToBitamp(drawable);
             Bitmap createbitmap = CreateMDicon(bitmap);
             imageView.setImageBitmap(createbitmap);
-        painting.TurnToActivity(test,getApplicationContext());
+        SetDraw(3,imageView1,stats);
+        SetDraw(2,imageView2,stats);
+        SetDraw(1,imageView3,stats);
+        SetDraw(0,imageView4,stats);
+        //painting.TurnToActivity(test,getApplicationContext());
         //Drawable  drawable;
         //drawable = painting.GetIcon(test,getApplicationContext());
         //Bitmap bitmap;
@@ -233,31 +528,20 @@ public class CardTaskFloatingWindow extends Service{
         //imageView.setImageBitmap(bitmap);
     }
 
-    public void SinglePicture(){
-        imageViewer = new ImageView(getApplicationContext());
-        List<UsageStats>stats = new painting().CreatAppList(getApplicationContext());
+    public void SetDraw(int num,ImageView imageView,List<UsageStats> stats){
+
+        painting painting = new painting();
         if (stats == null)return;
-        Drawable drawable = new painting().GetIcon(stats.get(3).getPackageName(),getApplicationContext());
-        Bitmap bitmap = new painting().drawableToBitamp(drawable);
-        final Bitmap bitmap1 = CreateMDicon(bitmap);
-        if (bitmap1 == null) return;
-        imageViewer.setImageBitmap(bitmap1);
-        layoutParams.height = bitmap1.getHeight() ;
-        layoutParams.width = bitmap1.getWidth() ;
-        imageViewer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                touchLayout.setMaxHeight(bitmap1.getHeight());
-                touchLayout.setMaxWidth(bitmap1.getWidth());
-                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageViewer,"rotation",0f,360f);
-                objectAnimator.setDuration(600);
-                objectAnimator.start();
-                Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_SHORT).show();
-            }
-        });
-        windowManager.addView(imageViewer,layoutParams);
+        String test = stats.get(num).getPackageName();
+        Drawable drawable;
+        Bitmap bitmap;
+        drawable = painting.GetIcon(stats.get(num).getPackageName(),getApplicationContext());
+        bitmap = painting.drawableToBitamp(drawable);
+        Bitmap createbitmap = CreateMDicon(bitmap);
+        imageView.setImageBitmap(createbitmap);
 
     }
+
 
     private Boolean hasPermission(){
         AppOpsManager appops = (AppOpsManager)getSystemService(Context.APP_OPS_SERVICE);
@@ -295,7 +579,7 @@ public class CardTaskFloatingWindow extends Service{
         int hidth1 = wm.getDefaultDisplay().getHeight();
         int width2 = bitmap.getWidth();
         int hidth2 = bitmap.getHeight();
-        Bitmap bitmap1 = Bitmap.createBitmap(width2*2,hidth2*2,Bitmap.Config.ARGB_8888);
+        Bitmap bitmap1 = Bitmap.createBitmap(width2*3,hidth2*2,Bitmap.Config.ARGB_8888);
         Paint paint = new Paint();
         Canvas canvas = new Canvas(bitmap1);
         paint.setColor(ColorIcon);

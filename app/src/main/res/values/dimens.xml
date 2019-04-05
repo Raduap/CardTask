@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="rotax">200dp</dimen>
+    <dimen name="rotay">50dp</dimen>
+    <dimen name="typewide">200dp</dimen>
+    <dimen name="typehide">100dp</dimen>
+</resources>

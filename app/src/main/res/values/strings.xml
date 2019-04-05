@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CardTask</string>
+    <integer name="rotax">168</integer>
+    <integer name="rotay">160</integer>
 </resources>

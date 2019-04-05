@@ -72,6 +72,22 @@ public class painting {
                         }
                     }
                 }
+
+                for (int i=0;i < stats.size();i++)
+                {
+                    if (stats.get(i).getPackageName().contains("launcher"))
+                    {
+                        stats.remove(i);
+                    }
+
+                }
+
+                for (int i=0;i < stats.size();i++)
+                {
+                    if (stats.get(i).getPackageName().equals("android")){
+                        stats.remove(i);
+                    }
+                }
                 //示例化的方法
                 statr = stats;
                 //最后复制进程名单
