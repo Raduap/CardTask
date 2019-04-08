@@ -93,12 +93,11 @@ public class CardTaskFloatingWindow extends Service{
             button.setBackgroundColor(PixelFormat.RGBA_8888);
             button.setBackground(getResources().getDrawable(R.drawable.floatin));
             windowManager.addView(button,layoutParams);
+
             button.setOnTouchListener(new FloatingOnTouchListener());
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_SHORT).show();
-
                     layoutParams.width =  windowManager.getDefaultDisplay().getWidth();
                     layoutParams.x = 0;
                     layoutParams.height = windowManager.getDefaultDisplay().getHeight();
@@ -116,6 +115,12 @@ public class CardTaskFloatingWindow extends Service{
 
     }
 
+    public static void stopservice(Context c){
+        Intent intent = new Intent(c,CardTaskFloatingWindow.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        c.stopService(intent);
+
+    }
 
     public void CheckClick()
     {
@@ -506,7 +511,8 @@ public class CardTaskFloatingWindow extends Service{
         ImageView imageView3 = touchLayout.findViewById(R.id.imageView9);
         ImageView imageView4 = touchLayout.findViewById(R.id.imageView10);
         painting painting = new painting();
-        if (stats == null)return;
+        if (stats.size()<4
+        )return;
         String test = stats.get(4).getPackageName();
         int i =stats.size();
             Drawable drawable;

@@ -1,5 +1,25 @@
 <resources>
-    <string name="app_name">CardTask</string>
+    <string name="app_name">卡片任务</string>
     <integer name="rotax">168</integer>
     <integer name="rotay">160</integer>
+    <string name="title_activity_welcome">致亲爱的你</string>
+    <string name="large_text">
+        "\n                       The Letter\n"
+        "\n     致亲爱的你：\n\n"
+        "\n\     这个应用源于我的一个小灵感.\n\n"
+
+        "    安卓系统在非全面屏时代，切换应用的方式是通过物理按键的点击实现的。\n\n"
+        "    当全面屏时代来临了之后呢？google采用了全面屏手势的方式来切换应用，It's so cool!\n\n"
+        "    但是，如果我们不再使用这些炫酷的全面屏手势呢？我们能否选择一种新的方式来切换APP呢？\n\n"
+        "    移动生态本身就是碎片化的。不知道你有没有这种体会：在切换App的时候，我们使用了太多手部的动作。"
+        "当你点击返回键，或者长按两秒菜单键，亦或者从底部划出切换菜单的时候，会不会在心里说：F**K，我只是想点一两下就能快速切换app，干嘛搞这么多花里胡哨的东西！\n\n"
+        "    所以我就设计了这个小程序，它没有很炫酷的画面，只有一个功能，一个近乎透明的悬浮窗口，占用你一小部分的屏幕空间，当你点击时，它能快速展开五个最近的应用，供你切换.\n\n"
+        "    我设计的理念是把APP看成一张张的小卡片，像扑克牌一样展开，毕竟移动生态是碎片化的，卡片在我看来就是最贴切的表现这种碎片化的事物\n\n"
+        "    由于个人水平所限制，所以开发的app可能会出现一些bug和不尽人意的地方，所以希望大家能谅解，多多指正\n\n"
+        "                                By Radua\n"
+        "                                   2019.4.5  in  襄阳\n\n\n"
+        "                      希望你能喜欢        \n\n\n\n\n"
+
+    </string>
+    <string name="action_settings">Settings</string>
 </resources>
