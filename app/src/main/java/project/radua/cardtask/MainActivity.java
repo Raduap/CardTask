@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .show();
         }
+        final Button cancelbutton = findViewById(R.id.button);
+        final Switch openswitch = findViewById(R.id.switch1);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,19 +52,55 @@ public class MainActivity extends AppCompatActivity {
                 if (paintin.isServiceRunning(getApplicationContext(),"project.radua.cardtask.CardTaskFloatingWindow")==false )
                 {
                     startFloatingService(new View(getApplicationContext()));
+
                     Snackbar.make(floatingActionButton,"点击悬浮窗试一下吧！",Snackbar.LENGTH_LONG).show();
 
+                    cancelbutton.setVisibility(View.VISIBLE);
+                    openswitch.setChecked(true);
                 }else {
                     Snackbar.make(floatingActionButton,"已经开启了悬浮窗",Snackbar.LENGTH_LONG).show();
 
                 }
             }
         });
+        painting paintrs = new painting();
+        if (paintrs.isServiceRunning(MainActivity.this,"project.radua.cardtask.CardTaskFloatingWindow")==false){
+            openswitch.setChecked(false);
+        }else {
+            openswitch.setChecked(true);
 
-        //this.setFinishOnTouchOutside(true);
+        }
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),CardTaskFloatingWindow.class);
+                stopService(intent);
+                Intent intent1 = new Intent(MainActivity.this,SettingActivity.class);
+                startActivity(intent1);
+            }
+        });
+        //this.setFinishOnTouchOutside(true)
+            openswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (!isChecked) {
+                        Intent intent = new Intent(MainActivity.this, CardTaskFloatingWindow.class);
+                        stopService(intent);
+                        openswitch.setChecked(false);
+                    }else {
+                        painting painting = new painting();
+                        if (painting.isServiceRunning(MainActivity.this,"project.radua.cardtask.CardTaskFloatingWindow")==false){
+                            startFloatingService(new View(getApplicationContext()));
+                        }
+                    }
+                }
+            });
+
     }
     public void startFloatingService(View view) {
         Intent intenta = new Intent(MainActivity.this, CardTaskFloatingWindow.class);
+
         if (!Settings.canDrawOverlays(this)) {
             Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT);
             startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), 0);
