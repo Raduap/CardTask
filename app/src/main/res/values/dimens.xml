@@ -2,8 +2,12 @@
 <resources>
     <dimen name="rotax">200dp</dimen>
     <dimen name="rotay">50dp</dimen>
+    <dimen name="rotax1">200dp</dimen>
+    <dimen name="rotay1">100dp</dimen>
     <dimen name="typewide">200dp</dimen>
     <dimen name="typehide">100dp</dimen>
+    <dimen name="typewide1">220dp</dimen>
+    <dimen name="typehide1">110dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">20dp</dimen>
