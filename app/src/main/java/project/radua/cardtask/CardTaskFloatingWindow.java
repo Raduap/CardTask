@@ -13,6 +13,7 @@ import android.app.Service;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 
@@ -637,6 +638,10 @@ public class CardTaskFloatingWindow extends Service{
         Canvas canvas = new Canvas(bitmap1);
         paint.setColor(ColorIcon);
         paint.setStyle(Paint.Style.FILL);
+        Paint paintinit = new Paint();
+        paintinit.setColor(Color.WHITE);
+        paintinit.setStyle(Paint.Style.FILL);
+        canvas.drawRect(0,0,width1,hidth1,paintinit);
         canvas.drawRect(0,0,width1,hidth1,paint);
         canvas.drawBitmap(bitmap,width2/2,hidth2/2,null);
         canvas.save();

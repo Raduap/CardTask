@@ -101,7 +101,11 @@ public class SettingActivity extends AppCompatActivity {
     protected void onDestroy() {
         painting painting = new painting();
         if (painting.isServiceRunning(SettingActivity.this, "project.radua.cardtask.CardTaskFloatingWindow") == false) {
-            startFloatingService(new View(getApplicationContext()));
+            SharedPreferences sp = getSharedPreferences("isrun",Context.MODE_PRIVATE);
+            int isrun = sp.getInt("runmode",0);
+            if (isrun == 1) {
+                startFloatingService(new View(getApplicationContext()));
+            }
         }
         super.onDestroy();
     }

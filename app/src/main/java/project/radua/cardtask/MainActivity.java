@@ -4,6 +4,7 @@ import android.app.AppOpsManager;
 import android.app.usage.UsageStats;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        painting paintrs = new painting();
+        final painting paintrs = new painting();
         if (paintrs.isServiceRunning(MainActivity.this,"project.radua.cardtask.CardTaskFloatingWindow")==false){
             openswitch.setChecked(false);
         }else {
@@ -74,9 +75,20 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),CardTaskFloatingWindow.class);
-                stopService(intent);
-                Intent intent1 = new Intent(MainActivity.this,SettingActivity.class);
+                if (paintrs.isServiceRunning(MainActivity.this,"project.radua.cardtask.CardTaskFloatingWindow")==true) {
+                    Intent intent = new Intent(getApplicationContext(), CardTaskFloatingWindow.class);
+                    stopService(intent);
+                    SharedPreferences sp = getSharedPreferences("isrun",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putInt("runmode",1);
+                    editor.commit();
+                }else{
+                    SharedPreferences sp = getSharedPreferences("isrun",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putInt("runmode",0);
+                    editor.commit();
+                }
+                Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent1);
             }
         });

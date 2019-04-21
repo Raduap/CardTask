@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SettingActivity">
 
+
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="339dp"
@@ -31,10 +32,10 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="107dp"
-                android:layout_marginTop="69dp"
-                android:layout_marginEnd="92dp"
-                android:layout_marginBottom="36dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="78dp"
+                android:layout_marginEnd="94dp"
+                android:layout_marginBottom="27dp"
                 android:checkedButton="@+id/radioButton"
                 android:orientation="vertical">
 
@@ -43,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="右下角" />
+                    android:text="右侧" />
 
                 <RadioButton
                     android:id="@+id/radioButton2"
@@ -51,6 +52,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="右侧底部" />
+
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="左侧" />
 
             </RadioGroup>
 
@@ -70,8 +78,8 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
-
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="339dp"
         android:layout_height="180dp"
         android:layout_marginStart="8dp"
@@ -82,15 +90,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.057"
-    >
+        app:layout_constraintVertical_bias="0.057">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_alignParentStart="true"
@@ -132,6 +139,70 @@
                 android:layout_marginEnd="18dp"
                 android:layout_marginBottom="10dp"
                 android:text="确定" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="340dp"
+        android:layout_height="178dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.189">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="175dp"
+                android:layout_marginBottom="129dp"
+                android:text="感谢你的使用" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="54dp"
+                android:layout_height="58dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="67dp"
+                android:layout_marginEnd="262dp"
+                android:layout_marginBottom="53dp"
+                app:srcCompat="@drawable/imgs" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="172dp"
+                android:layout_height="79dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="113dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="55dp"
+                android:layout_marginBottom="29dp"
+                android:text="作者：Radua\n qq :3295413003\n\n               兴趣使然的小作" />
+
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
