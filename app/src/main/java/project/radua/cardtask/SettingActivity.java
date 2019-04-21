@@ -28,18 +28,24 @@ public class SettingActivity extends AppCompatActivity {
 
     RadioButton radioButton1;
     RadioButton radioButton2;
+    RadioButton radioButton3;
+    RadioButton radioButton4;
+    RadioButton radioButton5;
     Button button;
     TextView textView;
     int Speed = 600;
     SharedPreferences sp;
     public int Position = 0;
-
+    public int ishide = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         radioButton1 = findViewById(R.id.radioButton);
         radioButton2 = findViewById(R.id.radioButton2);
+        radioButton3 = findViewById(R.id.radioButton3);
+        radioButton4 = findViewById(R.id.radioButton4);
+        radioButton5 = findViewById(R.id.radioButton5);
         textView = findViewById(R.id.textView2);
         sp = getSharedPreferences("positions", Context.MODE_PRIVATE);
         Position = sp.getInt("positions",0);
@@ -49,6 +55,18 @@ public class SettingActivity extends AppCompatActivity {
         if (Position == 1){
             radioButton2.setChecked(true);
         }
+        if (Position == 2) {
+            radioButton3.setChecked(true);
+        }
+        ishide = sp.getInt("ishide",0);
+            if (ishide == 0)
+            {
+                radioButton4.setChecked(true);
+            }
+            if (ishide == 1)
+            {
+                radioButton5.setChecked(true);
+            }
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +82,34 @@ public class SettingActivity extends AppCompatActivity {
                 Position = 1;
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putInt("positions",Position);
+                editor.commit();
+            }
+        });
+        radioButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Position = 2;
+                SharedPreferences.Editor editor= sp.edit();
+                editor.putInt("positions",Position);
+                editor.commit();
+
+            }
+        });
+        radioButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ishide = 0;
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("ishide",ishide);
+                editor.commit();
+            }
+        });
+        radioButton5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ishide = 1;
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("ishide",ishide);
                 editor.commit();
             }
         });

@@ -52,6 +52,7 @@ public class CardTaskFloatingWindow extends Service{
     private ImageView imageViewer ;
     private SharedPreferences share;
     private int position = 0;
+    private int ishide = 0;
     public int typex = 0;
     public int typey = 0;
     public int CardDuration = 600;
@@ -113,7 +114,11 @@ public class CardTaskFloatingWindow extends Service{
             button.setBackgroundColor(PixelFormat.RGBA_8888);
             button.setBackground(getResources().getDrawable(R.drawable.floatin));
             windowManager.addView(button,layoutParams);
-
+            SharedPreferences sphide = getSharedPreferences("positions",Context.MODE_PRIVATE);
+            ishide = sphide.getInt("ishide",0);
+            if (ishide == 1) {
+                button.setBackgroundResource(R.drawable.hide);
+            }
             button.setOnTouchListener(new FloatingOnTouchListener());
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -161,6 +166,14 @@ public class CardTaskFloatingWindow extends Service{
             int hidth = windowManager.getDefaultDisplay().getHeight();
             typex = width - 60;
             typey = hidth/5;
+        }
+
+        if (position == 2) {
+            touchLayout = (ConstraintLayout)LayoutInflater.from(getApplicationContext()).inflate(R.layout.cardfloatlayout3,null);
+            int width = windowManager.getDefaultDisplay().getWidth();
+            int hidth = windowManager.getDefaultDisplay().getHeight();
+            typex =-60;
+            typey =hidth/5;
         }
     }
     public static void stopservice(Context c){
@@ -643,7 +656,18 @@ public class CardTaskFloatingWindow extends Service{
         paintinit.setStyle(Paint.Style.FILL);
         canvas.drawRect(0,0,width1,hidth1,paintinit);
         canvas.drawRect(0,0,width1,hidth1,paint);
-        canvas.drawBitmap(bitmap,width2/2,hidth2/2,null);
+        SharedPreferences sp = getSharedPreferences("positions",0);
+        int position = 0;
+        position = sp.getInt("positions",0);
+        if (position == 0) {
+            canvas.drawBitmap(bitmap,width2/4,hidth2-30,null);
+        }
+        if (position == 2) {
+            canvas.drawBitmap(bitmap,width2 + 150,hidth2/3,null);
+        }
+        if (position == 1){
+            canvas.drawBitmap(bitmap,30,hidth2-30,null);
+        }
         canvas.save();
         return bitmap1;
     }

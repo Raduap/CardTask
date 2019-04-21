@@ -6,8 +6,8 @@ android {
         applicationId "project.radua.cardtask"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 4
-        versionName "2.10"
+        versionCode 5
+        versionName "2.30"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -7,10 +7,9 @@
     tools:context=".SettingActivity">
 
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="339dp"
-        android:layout_height="178dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -18,192 +17,275 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <RadioGroup
-                android:layout_width="140dp"
-                android:layout_height="72dp"
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="339dp"
+                android:layout_height="178dp"
+                android:layout_below="@+id/cardView2"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="105dp"
-                android:layout_marginTop="78dp"
-                android:layout_marginEnd="94dp"
-                android:layout_marginBottom="27dp"
-                android:checkedButton="@+id/radioButton"
-                android:orientation="vertical">
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="右侧" />
-
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="右侧底部" />
-
-                <RadioButton
-                    android:id="@+id/radioButton3"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="左侧" />
+                    android:layout_height="match_parent">
 
-            </RadioGroup>
+                    <RadioGroup
+                        android:layout_width="140dp"
+                        android:layout_height="72dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="105dp"
+                        android:layout_marginTop="78dp"
+                        android:layout_marginEnd="94dp"
+                        android:layout_marginBottom="27dp"
+                        android:checkedButton="@+id/radioButton"
+                        android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="175dp"
-                android:layout_marginBottom="129dp"
-                android:text="卡片展开方式" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+                        <RadioButton
+                            android:id="@+id/radioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="右侧" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="339dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.057">
+                        <RadioButton
+                            android:id="@+id/radioButton2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="右侧底部" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                        <RadioButton
+                            android:id="@+id/radioButton3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="左侧" />
 
-            <TextView
-                android:id="@+id/textView22"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="175dp"
-                android:layout_marginBottom="129dp"
-                android:text="卡片展开速度" />
+                    </RadioGroup>
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="190dp"
-                android:layout_height="45dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="81dp"
-                android:layout_marginTop="75dp"
-                android:layout_marginEnd="68dp"
-                android:layout_marginBottom="60dp"
-                android:ems="10"
-                android:hint="600"
-                android:inputType="numberSigned" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginEnd="175dp"
+                        android:layout_marginBottom="129dp"
+                        android:text="卡片展开方式" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="87dp"
-                android:layout_height="43dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="235dp"
-                android:layout_marginTop="127dp"
-                android:layout_marginEnd="18dp"
-                android:layout_marginBottom="10dp"
-                android:text="确定" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="339dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                app:layout_constraintVertical_bias="0.015">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="340dp"
-        android:layout_height="178dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        app:layout_constraintVertical_bias="0.189">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginEnd="175dp"
+                        android:layout_marginBottom="129dp"
+                        android:text="卡片展开速度" />
 
-            <TextView
-                android:id="@+id/textView31"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="175dp"
-                android:layout_marginBottom="129dp"
-                android:text="感谢你的使用" />
+                    <EditText
+                        android:id="@+id/editText"
+                        android:layout_width="190dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="81dp"
+                        android:layout_marginTop="75dp"
+                        android:layout_marginEnd="68dp"
+                        android:layout_marginBottom="60dp"
+                        android:ems="10"
+                        android:hint="600"
+                        android:inputType="numberSigned" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="54dp"
-                android:layout_height="58dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="67dp"
-                android:layout_marginEnd="262dp"
-                android:layout_marginBottom="53dp"
-                app:srcCompat="@drawable/imgs" />
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="87dp"
+                        android:layout_height="43dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="235dp"
+                        android:layout_marginTop="127dp"
+                        android:layout_marginEnd="18dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="确定" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="172dp"
-                android:layout_height="79dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="113dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginEnd="55dp"
-                android:layout_marginBottom="29dp"
-                android:text="作者：Radua\n qq :3295413003\n\n               兴趣使然的小作" />
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="340dp"
+                android:layout_height="178dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.487"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView4"
+                app:layout_constraintVertical_bias="1.0">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginEnd="175dp"
+                        android:layout_marginBottom="129dp"
+                        android:text="感谢你的使用" />
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="54dp"
+                        android:layout_height="58dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="67dp"
+                        android:layout_marginEnd="262dp"
+                        android:layout_marginBottom="53dp"
+                        app:srcCompat="@drawable/imgs" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="172dp"
+                        android:layout_height="79dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="113dp"
+                        android:layout_marginTop="70dp"
+                        android:layout_marginEnd="55dp"
+                        android:layout_marginBottom="29dp"
+                        android:text="作者：Radua\n qq :3295413003\n\n               兴趣使然的小作" />
 
 
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView4"
+                android:layout_width="340dp"
+                android:layout_height="178dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.482"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2"
+                app:layout_constraintVertical_bias="0.0" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="119dp"
+                        android:layout_height="33dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginEnd="201dp"
+                        android:layout_marginBottom="132dp"
+                        android:text="悬浮圈选项" />
+
+                    <RadioGroup
+                        android:layout_width="123dp"
+                        android:layout_height="56dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="66dp"
+                        android:layout_marginEnd="105dp"
+                        android:layout_marginBottom="56dp">
+
+                        <RadioButton
+                            android:id="@+id/radioButton4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="显示" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="隐藏" />
+                    </RadioGroup>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

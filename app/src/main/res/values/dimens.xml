@@ -4,6 +4,8 @@
     <dimen name="rotay">50dp</dimen>
     <dimen name="rotax1">200dp</dimen>
     <dimen name="rotay1">100dp</dimen>
+    <dimen name="rotax2">0dp</dimen>
+    <dimen name="rotay2">50dp</dimen>
     <dimen name="typewide">200dp</dimen>
     <dimen name="typehide">100dp</dimen>
     <dimen name="typewide1">220dp</dimen>
