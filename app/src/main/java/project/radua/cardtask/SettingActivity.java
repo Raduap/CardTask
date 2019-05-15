@@ -47,6 +47,7 @@ public class SettingActivity extends AppCompatActivity {
     Button button5;
     TextView textView;
     ImageView imageView11;
+    DBOperate dbOperate;
     int Speed = 600;
     SharedPreferences sp;
     SQLiteDatabase db;
@@ -68,6 +69,7 @@ public class SettingActivity extends AppCompatActivity {
         imageView11 = findViewById(R.id.imageView11);
         sp = getSharedPreferences("positions", Context.MODE_PRIVATE);
         Position = sp.getInt("positions",0);
+        init();
         if (Position == 0){
             radioButton1.setChecked(true);
         }
@@ -210,6 +212,17 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
+    public void init(){
+        dbOperate=new DBOperate(this);
+        byte[] imgData = dbOperate.readImage();
+        Bitmap imagebitmap = BitmapFactory.decodeByteArray(imgData, 0, imgData.length);
+        imageView11.setImageBitmap(imagebitmap);
+        SharedPreferences sps = getSharedPreferences("pisturefloat",Context.MODE_PRIVATE);
+        int asd = sps.getInt("key",0);
+        if (asd ==0){
+            imageView11.setImageResource(R.drawable.floatin);
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null){
@@ -223,12 +236,7 @@ public class SettingActivity extends AppCompatActivity {
                 try{
                     bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
                     imageView11.setImageBitmap(bitmap);
-                    db = dbHelper.getWritableDatabase();
-                    ContentValues cv = new ContentValues();
-                    cv.put("id",1);
-                    cv.put("avatar",bitmabToBytes(bitmap));
-                    db.insert("User", null, cv);
-                    db.close();
+                    dbOperate.saveImage(bitmap);
                     SharedPreferences sp = getSharedPreferences("pisturefloat",Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putInt("key",1);
@@ -238,27 +246,6 @@ public class SettingActivity extends AppCompatActivity {
                 }
             default:break;
         }
-    }
-    public byte[] bitmabToBytes(Bitmap bitmap){
-        int size = bitmap.getWidth() * bitmap.getHeight() * 4;
-        //创建一个字节数组输出流,流的大小为size
-        ByteArrayOutputStream baos= new ByteArrayOutputStream(size);
-        try {
-            //设置位图的压缩格式，质量为100%，并放入字节数组输出流中
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            //将字节数组输出流转化为字节数组byte[]
-            byte[] imagedata = baos.toByteArray();
-            return imagedata;
-        }catch (Exception e){
-        }finally {
-            try {
-                bitmap.recycle();
-                baos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return new byte[0];
     }
     @Override
     protected void onDestroy() {

@@ -137,11 +137,11 @@ public class CardTaskFloatingWindow extends Service{
             int IMAGECHANGE = 0;
             IMAGECHANGE = sfloatimage.getInt("key",0);
             if (IMAGECHANGE == 1){
-                byte[] imgData = readImage();
+                DBOperate dbOperate = new DBOperate(this);
+                byte[] imgData = dbOperate.readImage();
                 if (imgData != null) {
                     Bitmap imagebitmap = BitmapFactory.decodeByteArray(imgData, 0, imgData.length);
                     Drawable drawable = new BitmapDrawable(imagebitmap);
-                    Toast.makeText(getApplicationContext(), "!!", Toast.LENGTH_SHORT).show();
                     button.setBackground(drawable);
                 }
             }
