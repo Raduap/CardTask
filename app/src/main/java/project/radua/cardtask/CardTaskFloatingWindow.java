@@ -11,7 +11,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.app.Service;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,6 +23,7 @@ import android.graphics.PixelFormat;
 
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -53,6 +57,7 @@ public class CardTaskFloatingWindow extends Service{
     private Button button;
     private ImageView imageViewer ;
     private SharedPreferences share;
+    private SQLiteHelper dbhelper;
     private int position = 0;
     private int ishide = 0;
     public int typex = 0;
@@ -112,12 +117,34 @@ public class CardTaskFloatingWindow extends Service{
         windowManager.removeViewImmediate(button);
 
     }
+    public byte[] readImage(){
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        Cursor cur=db.query("User", new String[]{"id","avatar"}, null, null, null, null, null);
+        byte[] imgData=null;
+        if(cur.moveToNext()){
+            //将Blob数据转化为字节数组
+            imgData=cur.getBlob(cur.getColumnIndex("avatar"));
+        }
+        return imgData;
+    }
     public void showFloatingWindow(){
         if (Settings.canDrawOverlays(this)){
             button = new Button(getApplicationContext());
             button.setBackgroundColor(PixelFormat.RGBA_8888);
             button.setBackground(getResources().getDrawable(R.drawable.floatin));
             windowManager.addView(button,layoutParams);
+            SharedPreferences sfloatimage = getSharedPreferences("pisturefloat",Context.MODE_PRIVATE);
+            int IMAGECHANGE = 0;
+            IMAGECHANGE = sfloatimage.getInt("key",0);
+            if (IMAGECHANGE == 1){
+                byte[] imgData = readImage();
+                if (imgData != null) {
+                    Bitmap imagebitmap = BitmapFactory.decodeByteArray(imgData, 0, imgData.length);
+                    Drawable drawable = new BitmapDrawable(imagebitmap);
+                    Toast.makeText(getApplicationContext(), "!!", Toast.LENGTH_SHORT).show();
+                    button.setBackground(drawable);
+                }
+            }
             SharedPreferences sphide = getSharedPreferences("positions",Context.MODE_PRIVATE);
             ishide = sphide.getInt("ishide",0);
             if (ishide == 1) {

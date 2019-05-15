@@ -3,9 +3,11 @@ package project.radua.cardtask;
 import android.app.LauncherActivity;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -26,6 +28,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,10 +49,11 @@ public class SettingActivity extends AppCompatActivity {
     ImageView imageView11;
     int Speed = 600;
     SharedPreferences sp;
+    SQLiteDatabase db;
     public int Position = 0;
     public int ishide = 0;
     private static final int PICTURE = 10086;
-    private SQLiteHelper sqLiteHelper;
+    private SQLiteHelper dbHelper;
     private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,6 +203,10 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 imageView11.setImageResource(R.drawable.floatin);
+                SharedPreferences sp = getSharedPreferences("pisturefloat",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("key",0);
+                editor.commit();
             }
         });
     }
@@ -214,13 +223,43 @@ public class SettingActivity extends AppCompatActivity {
                 try{
                     bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
                     imageView11.setImageBitmap(bitmap);
+                    db = dbHelper.getWritableDatabase();
+                    ContentValues cv = new ContentValues();
+                    cv.put("id",1);
+                    cv.put("avatar",bitmabToBytes(bitmap));
+                    db.insert("User", null, cv);
+                    db.close();
+                    SharedPreferences sp = getSharedPreferences("pisturefloat",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putInt("key",1);
+                    editor.commit();
                 }catch (Exception e){
 
                 }
             default:break;
         }
     }
-
+    public byte[] bitmabToBytes(Bitmap bitmap){
+        int size = bitmap.getWidth() * bitmap.getHeight() * 4;
+        //创建一个字节数组输出流,流的大小为size
+        ByteArrayOutputStream baos= new ByteArrayOutputStream(size);
+        try {
+            //设置位图的压缩格式，质量为100%，并放入字节数组输出流中
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            //将字节数组输出流转化为字节数组byte[]
+            byte[] imagedata = baos.toByteArray();
+            return imagedata;
+        }catch (Exception e){
+        }finally {
+            try {
+                bitmap.recycle();
+                baos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return new byte[0];
+    }
     @Override
     protected void onDestroy() {
         painting painting = new painting();
