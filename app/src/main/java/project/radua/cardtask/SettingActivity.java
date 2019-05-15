@@ -48,6 +48,8 @@ public class SettingActivity extends AppCompatActivity {
     public int Position = 0;
     public int ishide = 0;
     private static final int PICTURE = 10086;
+    private SQLiteHelper sqLiteHelper;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
