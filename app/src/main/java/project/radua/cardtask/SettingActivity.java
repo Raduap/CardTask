@@ -1,9 +1,13 @@
 package project.radua.cardtask;
 
 import android.app.LauncherActivity;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
@@ -15,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -31,10 +36,13 @@ public class SettingActivity extends AppCompatActivity {
     RadioButton radioButton3;
     RadioButton radioButton4;
     RadioButton radioButton5;
+    Bitmap bitmap;
     Button button;
     Button button2;
     Button button3;
+    Button button5;
     TextView textView;
+    ImageView imageView11;
     int Speed = 600;
     SharedPreferences sp;
     public int Position = 0;
@@ -50,6 +58,7 @@ public class SettingActivity extends AppCompatActivity {
         radioButton4 = findViewById(R.id.radioButton4);
         radioButton5 = findViewById(R.id.radioButton5);
         textView = findViewById(R.id.textView2);
+        imageView11 = findViewById(R.id.imageView11);
         sp = getSharedPreferences("positions", Context.MODE_PRIVATE);
         Position = sp.getInt("positions",0);
         if (Position == 0){
@@ -178,8 +187,15 @@ public class SettingActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     intent.setType("image/*");
-                    intent.addCategory(Intent.ACTION_OPEN_DOCUMENT);
+                    //intent.addCategory(Intent.ACTION_OPEN_DOCUMENT);
                     startActivityForResult(intent,PICTURE);
+            }
+        });
+        button5 = findViewById(R.id.button5);
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView11.setImageResource(R.drawable.floatin);
             }
         });
     }
@@ -192,7 +208,13 @@ public class SettingActivity extends AppCompatActivity {
         Uri uri = data.getData();
         switch (requestCode){
             case PICTURE:
-                
+                ContentResolver cr = this.getContentResolver();
+                try{
+                    bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                    imageView11.setImageBitmap(bitmap);
+                }catch (Exception e){
+
+                }
             default:break;
         }
     }
