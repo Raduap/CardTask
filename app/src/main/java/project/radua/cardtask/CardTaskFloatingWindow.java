@@ -18,6 +18,8 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 
 
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -55,6 +57,7 @@ public class CardTaskFloatingWindow extends Service{
     private int ishide = 0;
     public int typex = 0;
     public int typey = 0;
+    public int RoundRectSize = 20;
     public int CardDuration = 600;
     public float IMAGE1_ROTA = -50f;
     public float IMAGE2_ROTA = -20f;
@@ -63,6 +66,7 @@ public class CardTaskFloatingWindow extends Service{
     public float IMAGE5_ROTA = 70f;
     public float HIDE_START_ROTAION = 180f;
     public float HIDE_FINISH_ROTAION = -180f;
+
     ConstraintLayout touchLayout;
 
     @Override
@@ -130,13 +134,9 @@ public class CardTaskFloatingWindow extends Service{
                     windowManager.addView(touchLayout,layoutParams);
                     windowManager.removeView(button);
                     CheckClick();
-
                 }
             });
-
         }
-
-
     }
     public void InitSetting(){
             SharedPreferences spsr = getSharedPreferences("speed",Context.MODE_PRIVATE);
@@ -634,6 +634,7 @@ public class CardTaskFloatingWindow extends Service{
             }
         }
     }
+    //绘制卡片生成图案
 
     public Bitmap CreateMDicon(Bitmap bitmap)
     {
@@ -642,8 +643,8 @@ public class CardTaskFloatingWindow extends Service{
         ColorIcon = painting.GetColor(bitmap);
         Context context = getApplicationContext();
         WindowManager wm = windowManager;
-        int width1 = wm.getDefaultDisplay().getWidth();
-        int hidth1 = wm.getDefaultDisplay().getHeight();
+        int width1;
+        int hidth1;
         int width2 = bitmap.getWidth();
         int hidth2 = bitmap.getHeight();
         Bitmap bitmap1 = Bitmap.createBitmap(width2*3,hidth2*2,Bitmap.Config.ARGB_8888);
@@ -654,8 +655,18 @@ public class CardTaskFloatingWindow extends Service{
         Paint paintinit = new Paint();
         paintinit.setColor(Color.WHITE);
         paintinit.setStyle(Paint.Style.FILL);
-        canvas.drawRect(0,0,width1,hidth1,paintinit);
-        canvas.drawRect(0,0,width1,hidth1,paint);
+        width1 = width2*3;
+        hidth1 = hidth2*2;
+        RectF rectinit = new RectF();
+        rectinit.left = 0;
+        rectinit.top = 0;
+        rectinit.right = width1;
+        rectinit.bottom = hidth1;
+        SharedPreferences sps = getSharedPreferences("round",0);
+        RoundRectSize = sps.getInt("round",20);
+        canvas.drawRoundRect(rectinit,RoundRectSize,RoundRectSize,paintinit);
+        canvas.drawRoundRect(rectinit,RoundRectSize,RoundRectSize,paint);
+        //不同位置绘制的区域不同
         SharedPreferences sp = getSharedPreferences("positions",0);
         int position = 0;
         position = sp.getInt("positions",0);

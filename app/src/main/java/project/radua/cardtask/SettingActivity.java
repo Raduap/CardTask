@@ -32,11 +32,14 @@ public class SettingActivity extends AppCompatActivity {
     RadioButton radioButton4;
     RadioButton radioButton5;
     Button button;
+    Button button2;
+    Button button3;
     TextView textView;
     int Speed = 600;
     SharedPreferences sp;
     public int Position = 0;
     public int ishide = 0;
+    private static final int PICTURE = 10086;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +144,57 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
+        button2 = findViewById(R.id.button3);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = findViewById(R.id.editText3);
+                String s = editText.getText().toString();
+                int re = 20;
+                try{
+                    re = Integer.parseInt(s);
+                }catch (Exception e){
+
+                }
+                if(re > 200||re < 0){
+                    Toast.makeText(getApplicationContext(),"超出极限值，请重新输入！",Toast.LENGTH_SHORT).show();
+                }else {
+                    SharedPreferences sps = getSharedPreferences("round", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sps.edit();
+                    editor.putInt("round",re);
+                    editor.commit();
+                    Snackbar.make(button,"设置成功",Snackbar.LENGTH_LONG).show();
+                    editText.clearFocus();
+                    InputMethodManager inputManager = (InputMethodManager) SettingActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(editText.getWindowToken(),0);
+                }
+            }
+        });
+
+        button3 = findViewById(R.id.button4);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    intent.addCategory(Intent.ACTION_OPEN_DOCUMENT);
+                    startActivityForResult(intent,PICTURE);
+            }
+        });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null){
+            this.finish();
+            return;
+        }
+        Uri uri = data.getData();
+        switch (requestCode){
+            case PICTURE:
+                
+            default:break;
+        }
     }
 
     @Override

@@ -123,7 +123,8 @@ public class MainActivity extends AppCompatActivity {
     }
     private int MY_PERMISSIONS_PACKAGE_USAGE_STATS;
     public void CheckHasPermisson(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT
+                >= Build.VERSION_CODES.KITKAT){
             if (!hasPermission()){
                 Toast.makeText(this,"请打开权限",Toast.LENGTH_SHORT);
                 startActivityForResult(
