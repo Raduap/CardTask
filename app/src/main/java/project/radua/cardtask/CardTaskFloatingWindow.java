@@ -667,9 +667,10 @@ public class CardTaskFloatingWindow extends Service{
     {
         int ColorIcon = -1;
         painting painting = new painting();
-        ColorIcon = painting.GetColor(bitmap);
-        Context context = getApplicationContext();
-        WindowManager wm = windowManager;
+        SharedPreferences spsao = getSharedPreferences("pickcolor",Context.MODE_PRIVATE);
+        int colipositionx = spsao.getInt("x",-1);
+        int colipositiony = spsao.getInt("y",-1);
+        ColorIcon = painting.GetColor(bitmap,colipositionx,colipositiony);
         int width1;
         int hidth1;
         int width2 = bitmap.getWidth();

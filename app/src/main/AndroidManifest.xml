@@ -42,6 +42,15 @@
         </activity>
 
         <service android:name=".CardTaskFloatingWindow" />
+        <service
+            android:name=".MyTileService"
+            android:label="卡片后台切换"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

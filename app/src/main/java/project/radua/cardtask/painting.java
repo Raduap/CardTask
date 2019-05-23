@@ -5,6 +5,7 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -124,9 +125,16 @@ public class painting {
     }
 
     //app专属取色
-    public int GetColor(Bitmap bitmap) {
+    public int GetColor(Bitmap bitmap,int colopositionx,int colopositiony) {
+
+        int positionx = 40;
+        int positiony = 40;
+        if (colopositionx != -1||colopositiony != -1){
+            positionx = colopositionx;
+            positiony = colopositiony;
+        }
         int Colo = -1;
-        Colo = bitmap.getPixel(40, 40);
+        Colo = bitmap.getPixel(positionx, positiony);
         int a = Color.alpha(Colo);
         int r = Color.red(Colo);
         int g = Color.green(Colo);

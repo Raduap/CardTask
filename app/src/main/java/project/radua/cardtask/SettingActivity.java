@@ -11,12 +11,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewDebug;
+import android.view.WindowInsets;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,7 +49,10 @@ public class SettingActivity extends AppCompatActivity {
     Button button2;
     Button button3;
     Button button5;
+    Button button6;
     TextView textView;
+    EditText editText2;
+    EditText editText3;
     ImageView imageView11;
     DBOperate dbOperate;
     int Speed = 600;
@@ -56,6 +63,7 @@ public class SettingActivity extends AppCompatActivity {
     private static final int PICTURE = 10086;
     private SQLiteHelper dbHelper;
     private Context context;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,16 +219,50 @@ public class SettingActivity extends AppCompatActivity {
                 editor.commit();
             }
         });
+        button6 = findViewById(R.id.button6);
+        editText2 = findViewById(R.id.editText2);
+        editText3 = findViewById(R.id.editText4);
+        editText2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(button6,"请输入大于0并且小于90的坐标值",Snackbar.LENGTH_SHORT).show();
+            }
+        });
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s1 = editText2.getText().toString();
+                String s2 = editText3.getText().toString();
+                int x = Integer.parseInt(s1);
+                int y = Integer.parseInt(s2);
+                if (x<0||y<0){
+                    Snackbar.make(button6,"请输入大于0并且小于90的坐标值",Snackbar.LENGTH_SHORT).show();
+                }else if(x>90||y>90){
+                    Snackbar.make(button6,"请输入大于0并且小于90的坐标值",Snackbar.LENGTH_SHORT).show();
+                }else {
+                    SharedPreferences sps = getSharedPreferences("pickcolor",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor spsedit= sps.edit();
+                    spsedit.putInt("x",x);
+                    spsedit.putInt("y",y);
+                    spsedit.commit();
+                    Snackbar.make(button6,"取色坐标保存成功！",Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     public void init(){
         dbOperate=new DBOperate(this);
         byte[] imgData = dbOperate.readImage();
-        Bitmap imagebitmap = BitmapFactory.decodeByteArray(imgData, 0, imgData.length);
-        imageView11.setImageBitmap(imagebitmap);
-        SharedPreferences sps = getSharedPreferences("pisturefloat",Context.MODE_PRIVATE);
-        int asd = sps.getInt("key",0);
-        if (asd ==0){
-            imageView11.setImageResource(R.drawable.floatin);
+        try {
+            Bitmap imagebitmap = BitmapFactory.decodeByteArray(imgData, 0, imgData.length);
+            imageView11.setImageBitmap(imagebitmap);
+            SharedPreferences sps = getSharedPreferences("pisturefloat", Context.MODE_PRIVATE);
+            int asd = sps.getInt("key", 0);
+            if (asd == 0) {
+                imageView11.setImageResource(R.drawable.floatin);
+            }
+        }catch (Exception e){
+
         }
     }
     @Override
